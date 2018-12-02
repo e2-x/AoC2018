@@ -1,2 +1,2 @@
 # AoC2018
-First time taking part of AoC
+First time taking part of Advent of Code
