@@ -7,15 +7,38 @@
 
 #include "pch.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
-void CreateFreqList(char file_name);
+// Read the input list and add/subtract from resulting frequency
+void CreateFreqList();
 
 int main()
 {
-
+	CreateFreqList();
 }
 
-void CreateFreqList(char file_name)
+void CreateFreqList()
 {
+	int end_freq = 0;
+	int current_line;
+	std::string line;
+	std::ifstream file("freq_input.txt");
 
+	while (std::getline(file, line))
+	{
+		if (line.find('+') != std::string::npos)
+		{
+			line.erase(line.begin());
+			current_line = std::stoi(line);
+			end_freq += current_line;
+		}
+		else
+		{
+			line.erase(line.begin());
+			current_line = std::stoi(line);
+			end_freq -= current_line;
+		}
+	}
+	std::cout << end_freq << "\n";
 }

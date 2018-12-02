@@ -1,3 +1,7 @@
 # ignore sln
 *.sln
 .vs/
+
+# ignore debug
+Debug/
+Day_1/Debug/
