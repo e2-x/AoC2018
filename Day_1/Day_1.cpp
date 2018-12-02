@@ -9,36 +9,84 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <unordered_set>
+#include <vector>
 
+// Day_1 - Part 1
 // Read the input list and add/subtract from resulting frequency
-void CreateFreqList();
+void FindResultFreq();
+// Day_1 - Part 2
+bool RepeatChangeList(int&, std::unordered_set<int>&);
+bool CheckDuplicateFreq(std::unordered_set<int>&, int);
+void run();
 
 int main()
 {
-	CreateFreqList();
+	FindResultFreq();
+}
+void FindResultFreq()
+{
+	int current_freq = 0;	// Resulting freq
+	int change_freq;		// Amount to change by
+	bool found = false;
+	std::string line;
+	std::ifstream file("freq_input.txt");
+	std::unordered_set<int> resultList;
+	resultList.insert(current_freq);
+
+	// Part One
+	while (std::getline(file, line))
+	{
+		change_freq = std::stoi(line);
+		current_freq += change_freq;
+		found = CheckDuplicateFreq(resultList, current_freq);
+	}
+	printf("Part One: %d \n", current_freq);
+
+	// Part two
+	while (!found)
+	{
+		found = RepeatChangeList(current_freq, resultList);
+	}
 }
 
-void CreateFreqList()
+bool CheckDuplicateFreq(std::unordered_set<int> &result_list, int current_freq)
 {
-	int end_freq = 0;
-	int current_line;
+	bool duplicate_found = false;
+
+	if (result_list.find(current_freq) != result_list.end())
+	{
+		printf("Part Two: %d \n", current_freq);
+		duplicate_found = true;
+	}
+	else
+	{
+		result_list.insert(current_freq);
+	}
+	return duplicate_found;
+}
+
+bool RepeatChangeList(int &current_freq, std::unordered_set<int> &result_list)
+{
+	// Pick off with the end freq
+	int change_freq;	
+	int* freq_ptr;
+	bool found = false;
 	std::string line;
 	std::ifstream file("freq_input.txt");
 
 	while (std::getline(file, line))
 	{
-		if (line.find('+') != std::string::npos)
+		change_freq = std::stoi(line);
+		current_freq += change_freq;
+		found = CheckDuplicateFreq(result_list, current_freq);
+		
+		if (found)
 		{
-			line.erase(line.begin());
-			current_line = std::stoi(line);
-			end_freq += current_line;
-		}
-		else
-		{
-			line.erase(line.begin());
-			current_line = std::stoi(line);
-			end_freq -= current_line;
+			break;
 		}
 	}
-	std::cout << end_freq << "\n";
+	freq_ptr = &current_freq;
+	*freq_ptr = current_freq;
+	return found;
 }

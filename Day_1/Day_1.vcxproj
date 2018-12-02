@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\Desktop\freq_input.txt" />
+    <Text Include="test_inputs.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

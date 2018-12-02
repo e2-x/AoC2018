@@ -31,5 +31,8 @@
     <Text Include="..\..\..\..\Desktop\freq_input.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="test_inputs.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
