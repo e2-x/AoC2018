@@ -12,13 +12,10 @@
 #include <unordered_set>
 #include <vector>
 
-// Day_1 - Part 1
 // Read the input list and add/subtract from resulting frequency
 void FindResultFreq();
-// Day_1 - Part 2
 bool RepeatChangeList(int&, std::unordered_set<int>&);
 bool CheckDuplicateFreq(std::unordered_set<int>&, int);
-void run();
 
 int main()
 {
