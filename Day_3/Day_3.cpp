@@ -9,10 +9,12 @@
 
 int main()
 {
+	int count = 0;
+	int ID, x, y, h, w;
 	bool collisionFree = true;
 	char* arr = (char*)calloc(1000, 1000);
 	FILE* f = fopen("day_3_input.txt", "r");
-	int ID, x, y, h, w, count = 0;
+
 	while (EOF != fscanf(f, "#%d @ %d,%d: %dx%d\n", &ID, &x, &y, &w, &h))
 	{
 		for (int i = x; i < x + w; i++)
@@ -24,9 +26,10 @@ int main()
 			}
 		}
 	}
-
 	printf("Part One: %d\n", count);
-	f = fopen("day_3_input.txt", "r");
+
+	// Reset pointer for Part Two
+	fseek(f, 0, SEEK_SET);
 	while (EOF != fscanf(f, "#%d @ %d,%d: %dx%d\n", &ID, &x, &y, &w, &h))
 	{
 		collisionFree = true;
@@ -47,5 +50,8 @@ int main()
 			printf("Part Two: %d", ID);
 		}
 	}
+	// Clean up
+	fclose(f);
+	free(arr);
 	system("pause");
 }
